@@ -4,6 +4,7 @@ from models.perfil import *
 import jwt
 from datetime import datetime, timedelta
 import hashlib as h
+import json
 key='asfubsdivg'
 
 
@@ -55,8 +56,9 @@ class Usuarioc():
         if c_usuario and c_usuario.password == password:
             payload = {
                 'usuario': usuario,
+                'userId': c_usuario.userId,
                 'perfil': c_usuario.perfilId,
-                'exp':datetime.utcnow()+timedelta(hours=5,minutes=1)
+                'exp':datetime.utcnow()+timedelta(hours=5,minutes=10)
             }
             token = jwt.encode(payload, key, algorithm='HS256')
             response = make_response(jsonify({
@@ -68,7 +70,8 @@ class Usuarioc():
                                             "Correo" : c_usuario.correo,
                                             "Perfil" : c_usuario.perfilId, 
                                             "password" : c_usuario.password,
-                                            "token":token}))
+                                            "token":token,
+                                            "status":"ok"}))
             return response
         else:
             response = make_response(jsonify({'error': 'Credenciales incorrectas'}), 300)
@@ -79,14 +82,21 @@ class Usuarioc():
             token = request.json['token']
             decoded_token = jwt.decode(token, key, algorithms=['HS256'])
             expiracion = datetime.fromtimestamp(decoded_token['exp'])
+            usuario = decoded_token['usuario']
+            perfil = decoded_token["perfil"]
+            userId = decoded_token['userId']
             if datetime.utcnow() < expiracion:
-                return jsonify({'valid': True})
+                return jsonify({'valid': "True",
+                                'usuario': usuario,
+                                'perfil': perfil,
+                                'userId':userId
+                                })
             else:
-                return jsonify({'valid': False, 'error': 'Token expirado'}), 401
+                return jsonify({'valid': "False", 'error': 'Token expirado'}), 401
         except jwt.exceptions.ExpiredSignatureError:
-            return jsonify({'valid': False, 'error': 'Token expirado'}), 401
+            return jsonify({'valid': "False", 'error': 'Token expirado'}), 401
         except jwt.exceptions.InvalidTokenError:
-            return jsonify({'valid': False, 'error': 'Token inválido'}), 401
+            return jsonify({'valid': "False", 'error': 'Token inválido'}), 401
     def editar_usuario(self):
         userId = request.json["userId"]
         c_usuario = Usuario.query.get(userId)

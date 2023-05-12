@@ -12,7 +12,7 @@ from routes.prestamor import prestamo
 
 app = Flask(__name__)
 cors = CORS(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://ayhu7vombbh2260i59th:pscale_pw_np9ypu34dr04sLmuegiTewlnGZqOPpbytwkYB9bQQtZ@aws.connect.psdb.cloud/prestamo?ssl={"rejectUnauthorized":true}'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://h6mj0ki7lg34eylplyjk:pscale_pw_sbuCxVruMhAJKvIwYPC8QET0e1szsX2LbU1hwRtQxPi@aws.connect.psdb.cloud/prestamo?ssl={"rejectUnauthorized":true}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 app.register_blueprint(perfil)
