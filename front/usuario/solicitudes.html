@@ -1,0 +1,98 @@
+ <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="/front/css/admin.css">
+<script src="js/admin.js"></script>
+<link rel="stylesheet" href="/front/css/crear.css">
+<link rel="stylesheet" href="/front/css/loader.css">
+<script src="/front/js/loader.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div id="throbber" style="display:none; min-height:120px;"></div>
+<div id="noty-holder"></div>
+<div id="wrapper">
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/front/menu.html">
+                <img src="/front/imagenes/logo.png" width="145px" weight="250px">
+            </a>
+        </div>
+    <body onload="consultar_solicitudes()">
+        <!-- Top Menu Items -->
+        <ul class="nav navbar-right top-nav">
+            <li><a href="#" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Stats"><i class="fa fa-bar-chart-o"></i>
+                </a>
+            </li>            
+            <li class="dropdown">
+                <a color=#f0f00f class="fa fa-fw fa-power-off">Usuario </a>
+                <li><a href="/front/index.html"><i class="fa fa-fw fa-power-off"></i> Cerrar sesion</a></li>
+            </li>
+        </ul>
+        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li>
+                    <a href="/front/usuario/item.html" data-toggle="collapse" data-target="#submenu-2"><i class="fa fa-fw fa-star"></i>  Items <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                </li>
+                <li>
+                    <a href="/front/usuario/solicitudes.html"><i class="fa fa-fw fa-user-plus"></i>  Solicitudes</a>
+                </li>
+                <li>
+                    <a href="/front/usuario/prestamos.html"><i class="fa fa-fw fa-paper-plane-o"></i> Prestamos</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col">
+                <h4 style="padding:  20px;" >Lista de solicitudes <button class="boton-rojo" onclick="mostrarFormulario()">Crear solicitud</button></h4>
+                <div id="formulario" style="display:none">
+                    <h2>Agregar Solicitud</h2>
+                    <form class="form" onsubmit="agregarSolicitud(event)">
+
+                        <label class="flabel"  for="userId">usuarioId</label>
+                        <input class="finput" type="text" id="userId" name="userId"><br><br>
+            
+                        <label class="flabel"  for="itemId">itemId</label>
+                        <input class="finput" type="itemId" id="itemId" name="itemId"><br><br>
+
+                        <input type="submit" value="Crear">
+                    </form>
+                </div>
+              <table class= "table table-striped table-hover caption-top" id="tablasolicitudes">
+                <thead>
+                    <tr >
+                    <th scope="col">#</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">item</th>
+                    <th scope="col">fechasolicitud</th>
+                    <th scope="col">estado</th>
+                    <th scope="col">observacion</th>
+                    <th scope="col"></th>
+                </tr>
+       </thead>
+        </table>
+        </div>  
+       </div> 
+       <!-- /.container-fluid -->
+   </div>
+   <div id="loader-wrapper">
+       <div class="loader"></div>
+     </div>
+   </div>
+    <!-- /#page-wrapper -->
+    <script src="/front/js/usuario/solicitudes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</div><!-- /#wrapper -->
+
+
